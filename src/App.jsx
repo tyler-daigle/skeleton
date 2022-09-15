@@ -9,12 +9,43 @@ import {
 } from "./components/Skeleton";
 
 import "./App.css";
+import { useEffect, useState } from "react";
+
+function ParagraphPlaceHolder() {
+  return (
+    <SkeletonContainer>
+      <SkeletonRow rows={1} rowHeight={2} cols={20} />
+      <SkeletonRow rows={4} fullWidth />
+    </SkeletonContainer>
+  );
+}
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000);
+  }, []);
+
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <h1>This is a skeleton.</h1>
-      <SkeletonContainer color="#ABC">
+      {loading ? (
+        <ParagraphPlaceHolder />
+      ) : (
+        <>
+          <h2>This is a Paragraph</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
+            illum repellat illo quod mollitia nisi voluptate consequuntur sequi
+            ex sunt aperiam expedita in aut, itaque explicabo doloribus
+            recusandae. Ab voluptatum quas modi! Beatae, expedita. Cumque illum
+            qui dignissimos iusto totam nesciunt nemo soluta? Autem, molestias!
+            Soluta ad dolores quas suscipit?
+          </p>
+        </>
+      )}
+      {/* <SkeletonContainer color="#757575">
         <SkeletonGroup>
           <SkeletonCircle radius={5} />
           <SkeletonCircle radius={5} />
@@ -30,6 +61,13 @@ function App() {
           <SkeletonButton />
         </SkeletonGroup>
       </SkeletonContainer>
+
+      <SkeletonContainer color="red">
+        <SkeletonGroup>
+          <SkeletonCircle radius={5} />
+          <SkeletonCircle radius={5} />
+        </SkeletonGroup>
+      </SkeletonContainer> */}
     </div>
   );
 }

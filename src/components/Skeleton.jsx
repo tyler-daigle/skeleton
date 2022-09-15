@@ -1,13 +1,23 @@
 import PropTypes from "prop-types";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import styles from "../styles/Skeleton.module.css";
 const ColorContext = React.createContext();
 
-export function SkeletonContainer({ children, color = "lightgray" }) {
+export function SkeletonContainer({
+  children,
+  color = "lightgray",
+  fullWidth = true,
+}) {
   return (
     <ColorContext.Provider value={color}>
-      <div className={styles.skeletonContainer}>{children}</div>
+      <div
+        className={`${styles.skeletonContainer} ${
+          fullWidth ? styles.skeletonContainerFull : ""
+        }`}
+      >
+        {children}
+      </div>
     </ColorContext.Provider>
   );
 }
@@ -18,6 +28,7 @@ export function SkeletonRow({
   cols = 1,
   padding,
   unit = "rem",
+  fullWidth = false,
 }) {
   const bones = [];
   const color = useContext(ColorContext);
@@ -29,7 +40,7 @@ export function SkeletonRow({
         className={styles.bone}
         style={{
           height: `${rowHeight + unit}`,
-          width: `${cols + unit}`,
+          width: fullWidth ? "100%" : `${cols + unit}`,
           padding: padding ? `${padding + unit}` : "0",
           backgroundColor: color,
         }}
@@ -53,10 +64,12 @@ export function SkeletonCircle({ radius = 2 }) {
   );
 }
 
+// SkeletonGroup is a flex box with flex-direction equal to row
 export function SkeletonGroup({ children }) {
   return <div className={styles.skeletonGroup}>{children}</div>;
 }
 
+// SkeletonStack is a flex box with flex-direction equal to column
 export function SkeletonStack({ children }) {
   return <div className={styles.skeletonStack}>{children}</div>;
 }
