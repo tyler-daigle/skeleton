@@ -12,7 +12,13 @@ export function SkeletonContainer({ children, color = "lightgray" }) {
   );
 }
 
-export function SkeletonRow({ rows = 1, rowHeight = 1, cols = 1, padding }) {
+export function SkeletonRow({
+  rows = 1,
+  rowHeight = 1,
+  cols = 1,
+  padding,
+  unit = "rem",
+}) {
   const bones = [];
   const color = useContext(ColorContext);
 
@@ -22,9 +28,9 @@ export function SkeletonRow({ rows = 1, rowHeight = 1, cols = 1, padding }) {
         key={i}
         className={styles.bone}
         style={{
-          height: `${rowHeight}rem`,
-          width: `${cols}rem`,
-          padding: padding ? `${padding}rem` : "0",
+          height: `${rowHeight + unit}`,
+          width: `${cols + unit}`,
+          padding: padding ? `${padding + unit}` : "0",
           backgroundColor: color,
         }}
       ></span>
@@ -51,14 +57,24 @@ export function SkeletonGroup({ children }) {
   return <div className={styles.skeletonGroup}>{children}</div>;
 }
 
+export function SkeletonStack({ children }) {
+  return <div className={styles.skeletonStack}>{children}</div>;
+}
+
 export function SkeletonButton() {
   return <SkeletonRow rows={1} rowHeight={3} cols={10} />;
 }
+
+export function SkeletonImage({ width, height }) {
+  return <SkeletonRow rows={1} rowHeight={height} cols={width} unit="px" />;
+}
+
 SkeletonRow.propTypes = {
   rows: PropTypes.number,
   rowHeight: PropTypes.number,
   cols: PropTypes.number,
   padding: PropTypes.number,
+  unit: PropTypes.string,
 };
 
 SkeletonContainer.propTypes = {

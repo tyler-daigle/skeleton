@@ -3,7 +3,9 @@ import {
   SkeletonCircle,
   SkeletonContainer,
   SkeletonGroup,
+  SkeletonImage,
   SkeletonRow,
+  SkeletonStack,
 } from "./components/Skeleton";
 
 import "./App.css";
@@ -17,7 +19,12 @@ function App() {
           <SkeletonCircle radius={5} />
           <SkeletonCircle radius={5} />
         </SkeletonGroup>
-        <SkeletonRow rows={5} rowHeight={1} cols={25} padding={0.5} />
+        <SkeletonGroup>
+          <SkeletonImage width={300} height={200} />
+          <SkeletonStack>
+            <SkeletonRow rows={5} rowHeight={1} cols={25} padding={0.5} />
+          </SkeletonStack>
+        </SkeletonGroup>
         <SkeletonGroup>
           <SkeletonButton />
           <SkeletonButton />

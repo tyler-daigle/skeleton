@@ -19,3 +19,9 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.skeletonStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
