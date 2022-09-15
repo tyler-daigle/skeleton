@@ -1,13 +1,20 @@
 import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 
 import styles from "../styles/Skeleton.module.css";
+const ColorContext = React.createContext();
 
-export function SkeletonContainer({ children }) {
-  return <div className={styles.skeletonContainer}>{children}</div>;
+export function SkeletonContainer({ children, color = "lightgray" }) {
+  return (
+    <ColorContext.Provider value={color}>
+      <div className={styles.skeletonContainer}>{children}</div>
+    </ColorContext.Provider>
+  );
 }
 
 export function SkeletonRow({ rows = 1, rowHeight = 1, cols = 1, padding }) {
   const bones = [];
+  const color = useContext(ColorContext);
 
   for (let i = 0; i < rows; i++) {
     bones.push(
@@ -18,6 +25,7 @@ export function SkeletonRow({ rows = 1, rowHeight = 1, cols = 1, padding }) {
           height: `${rowHeight}rem`,
           width: `${cols}rem`,
           padding: padding ? `${padding}rem` : "0",
+          backgroundColor: color,
         }}
       ></span>
     );
@@ -26,10 +34,15 @@ export function SkeletonRow({ rows = 1, rowHeight = 1, cols = 1, padding }) {
 }
 
 export function SkeletonCircle({ radius = 2 }) {
+  const color = useContext(ColorContext);
   return (
     <span
       className={`${styles.bone} ${styles.boneCircle}`}
-      style={{ width: `${radius}rem`, height: `${radius}rem` }}
+      style={{
+        width: `${radius}rem`,
+        height: `${radius}rem`,
+        backgroundColor: color,
+      }}
     />
   );
 }
