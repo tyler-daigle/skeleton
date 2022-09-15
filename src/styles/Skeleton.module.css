@@ -1,0 +1,22 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: min-content;
+}
+
+.bone {
+  display: block;
+  background-color: lightgray;
+  border-radius: 3px;
+}
+
+.boneCircle {
+  border-radius: 500px;
+}
+
+.skeletonGroup {
+  display: flex;
+  gap: 0.5rem;
+}
