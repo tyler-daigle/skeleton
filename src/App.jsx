@@ -24,7 +24,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2000);
+    setInterval(() => setLoading((state) => !state), 2000);
   }, []);
 
   return (
@@ -45,29 +45,6 @@ function App() {
           </p>
         </>
       )}
-      {/* <SkeletonContainer color="#757575">
-        <SkeletonGroup>
-          <SkeletonCircle radius={5} />
-          <SkeletonCircle radius={5} />
-        </SkeletonGroup>
-        <SkeletonGroup>
-          <SkeletonImage width={300} height={200} />
-          <SkeletonStack>
-            <SkeletonRow rows={5} rowHeight={1} cols={25} padding={0.5} />
-          </SkeletonStack>
-        </SkeletonGroup>
-        <SkeletonGroup>
-          <SkeletonButton />
-          <SkeletonButton />
-        </SkeletonGroup>
-      </SkeletonContainer>
-
-      <SkeletonContainer color="red">
-        <SkeletonGroup>
-          <SkeletonCircle radius={5} />
-          <SkeletonCircle radius={5} />
-        </SkeletonGroup>
-      </SkeletonContainer> */}
     </div>
   );
 }
